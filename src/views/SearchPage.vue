@@ -9,18 +9,18 @@
             src="https://www.bainsight.com//wp-content/uploads/2012/09/google-cloud-logo.png"
           >
           <h1>O que está procurando?</h1>
-          <v-form>
+          <v-form v-on:submit.prevent>
             <v-container>
               <v-layout row>
                 <v-flex>
-                  <v-text-field></v-text-field>
+                  <v-text-field v-on:keyup.enter="show = !show"></v-text-field>
                 </v-flex>
               </v-layout>
             </v-container>
           </v-form>
         </v-flex>
       </v-layout>
-      <SearchSection/>
+      <SearchSection :show="show"/>
       <LinkSearch/>
     </v-container>
   </div>
@@ -36,6 +36,11 @@ export default {
     Toolbar,
     SearchSection,
     LinkSearch
+  },
+  data() {
+    return {
+      show: true
+    };
   }
 };
 </script>

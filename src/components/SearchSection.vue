@@ -1,5 +1,6 @@
 <template>
-  <div class="portal">
+<transition name="fade">
+  <div v-if="!show" class="portal">
     <section class="product-selector mb-5" data-stats-ve="45">
       <ul>
         <li>
@@ -55,13 +56,24 @@
       </ul>
     </section>
   </div>
+</transition>
 </template>
 
 <script>
-export default {};
+export default {
+  props: {
+        show: Boolean
+    },
+};
 </script>
 
 <style scoped>
+.fade-enter-active, .fade-leave-active {
+  transition: opacity .5s;
+}
+.fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
+  opacity: 0;
+}
 .portal .product-selector li,
 .portal .list-of-hcs li {
   box-sizing: border-box;
