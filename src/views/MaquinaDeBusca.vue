@@ -26,9 +26,15 @@
                         <v-text-field label="Url a ser processada"></v-text-field>
                       </v-flex>
                     </v-layout>
-
-                    <v-subheader class="pl-0">Nível de profundidade a ser percorrido</v-subheader>
-                    <v-slider v-model="slider" thumb-label="always"></v-slider>
+                    <v-flex xs12 sm6>
+                      <v-slider
+                        color="blue"
+                        label="Profundidade"
+                        min="1"
+                        max="100"
+                        thumb-label
+                      ></v-slider>
+                    </v-flex>
                     <div class="text-xs-center">
                       <v-btn
                         :loading="loading"
@@ -59,25 +65,25 @@ export default {
   components: {
     Toolbar
   },
-  data () {
-      return {
-        loader: null,
-        loading: false,
-        loading2: false,
-        loading3: false,
-        loading4: false
-      }
-    },
-    watch: {
-      loader () {
-        const l = this.loader
-        this[l] = !this[l]
+  data() {
+    return {
+      loader: null,
+      loading: false,
+      loading2: false,
+      loading3: false,
+      loading4: false
+    };
+  },
+  watch: {
+    loader() {
+      const l = this.loader;
+      this[l] = !this[l];
 
-        setTimeout(() => (this[l] = false), 3000)
+      setTimeout(() => (this[l] = false), 3000);
 
-        this.loader = null
-      }
+      this.loader = null;
     }
+  }
 };
 </script>
 

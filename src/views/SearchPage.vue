@@ -13,7 +13,7 @@
             <v-container>
               <v-layout row>
                 <v-flex>
-                  <v-text-field v-on:keyup.enter="show = !show"></v-text-field>
+                  <v-text-field v-on:keyup.enter="show = !show" append-icon="search"></v-text-field>
                 </v-flex>
               </v-layout>
             </v-container>

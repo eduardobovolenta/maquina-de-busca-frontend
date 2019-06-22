@@ -55,7 +55,7 @@
             </v-list-tile-avatar>
 
             <v-list-tile-content>
-              <v-list-tile-title>Eduardo Bovolenta</v-list-tile-title>
+              <v-list-tile-title>{{username}}</v-list-tile-title>
             </v-list-tile-content>
 
             <v-list-tile-action>
@@ -98,19 +98,22 @@
 </template>
 
 <script>
-export default {
-  data() {
-    return {
-      drawer: null,
-      items: [
-        { title: "Home", icon: "dashboard" },
-        { title: "About", icon: "question_answer" }
-      ],
-      mini: false,
-      right: null
-    };
+import {Vue, Component} from 'vue-property-decorator';
+import users from '@/store/modules/users'
+
+@Component
+export default class Toolbar extends Vue{
+  get username(){
+    return users;
   }
-};
+  drawer = null
+  items =  [
+    { title: "Home", icon: "dashboard" },
+    { title: "About", icon: "question_answer" }
+  ]
+  mini =  false
+  right = null
+}
 </script>
 
 <style scoped>
@@ -123,6 +126,4 @@ export default {
 .application a {
   text-decoration: none;
 }
-
-
 </style>
