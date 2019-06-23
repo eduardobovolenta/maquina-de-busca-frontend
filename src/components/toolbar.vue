@@ -11,8 +11,8 @@
               <v-btn v-on="on" flat>
                 <v-avatar flat color="grey lighten-4">
                   <img
-                    src="https://media.licdn.com/dms/image/C5603AQFUrInY3i4L8A/profile-displayphoto-shrink_200_200/0?e=1566432000&v=beta&t=fxBzkj6b8bIM3G8rznFGxKlL9zqMvswt-4017nk0roE"
-                    alt="Eduardo"
+                    v-bind:src="user.avatar"
+                    v-bind:alt="user.name"
                   >
                 </v-avatar>
               </v-btn>
@@ -50,12 +50,12 @@
           <v-list-tile avatar tag="div">
             <v-list-tile-avatar>
               <img
-                src="https://media.licdn.com/dms/image/C5603AQFUrInY3i4L8A/profile-displayphoto-shrink_200_200/0?e=1566432000&v=beta&t=fxBzkj6b8bIM3G8rznFGxKlL9zqMvswt-4017nk0roE"
+                v-bind:src="user.avatar"
               >
             </v-list-tile-avatar>
 
             <v-list-tile-content>
-              <v-list-tile-title>{{username}}</v-list-tile-title>
+              <v-list-tile-title>{{user.nome}}</v-list-tile-title>
             </v-list-tile-content>
 
             <v-list-tile-action>
@@ -97,15 +97,16 @@
   </div>
 </template>
 
-<script>
-import {Vue, Component} from 'vue-property-decorator';
-import users from '@/store/modules/users'
+<script lang="ts">
+import {Vue, Component, Prop} from 'vue-property-decorator';
+import users from '@/store/modules/users';
 
 @Component
 export default class Toolbar extends Vue{
-  get username(){
-    return users;
+  get user() {
+    return users.user;
   }
+
   drawer = null
   items =  [
     { title: "Home", icon: "dashboard" },

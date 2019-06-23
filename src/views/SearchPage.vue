@@ -13,7 +13,7 @@
             <v-container>
               <v-layout row>
                 <v-flex>
-                  <v-text-field v-on:keyup.enter="show = !show" append-icon="search"></v-text-field>
+                  <v-text-field v-on:keyup.enter="show = !show, searchLink()" append-icon="search"></v-text-field>
                 </v-flex>
               </v-layout>
             </v-container>
@@ -26,23 +26,26 @@
   </div>
 </template>
 
-<script>
+<script lang="ts">
+import {Vue, Component, Prop} from 'vue-property-decorator';
 import Toolbar from "../components/toolbar.vue";
 import SearchSection from "../components/SearchSection.vue";
 import LinkSearch from "../components/LinkSearch.vue";
 
-export default {
+@Component({
   components: {
     Toolbar,
     SearchSection,
-    LinkSearch
+    LinkSearch,
   },
-  data() {
-    return {
-      show: true
-    };
-  }
-};
+})
+
+export default class SearchPage extends Vue {
+  show = false;
+    searchLink(){
+      console.log('taaq')
+    }
+}
 </script>
 
 <style>

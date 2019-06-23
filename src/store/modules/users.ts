@@ -6,7 +6,7 @@ import { realizarLogin } from '../api';
 
 @Module({
     namespaced: true,
-    name: 'users',
+    name: 'user',
     store,
     dynamic: true
 })
@@ -14,13 +14,10 @@ import { realizarLogin } from '../api';
 class UsersModule extends VuexModule {
     user: User | null = null
 
-    get username() {
-        return (this.user) || null;
-    }
-
     @MutationAction
     async login(userSubmit: UserSubmit) {
         const user = await realizarLogin(userSubmit);
+        console.log(user)
         return { user };
     }
 }

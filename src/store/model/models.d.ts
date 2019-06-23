@@ -17,6 +17,14 @@ export interface UserSubmit{
     senha: string;
 }
 
+export interface BuscaSubmit{
+    consulta: string;
+}
+
 export interface UserResponse {
-    user: User
+    user: User;
+}
+
+export interface LinkResponse {
+    link: Link;
 }
