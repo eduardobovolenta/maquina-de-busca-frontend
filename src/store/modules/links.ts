@@ -1,6 +1,6 @@
 import { VuexModule, Module, getModule, MutationAction, Mutation, Action } from 'vuex-module-decorators'
 import store from '@/store'
-import { Link, BuscaSubmit, CrawlerSubmit } from '../model/models';
+import { Link, BuscaSubmit, CrawlerSubmit, Title } from '../model/models';
 import { realizarBusca, rodarCrawler} from '../api';
 
 
@@ -12,12 +12,13 @@ import { realizarBusca, rodarCrawler} from '../api';
 })
 class LinksModule extends VuexModule {
     urlsBuscadas: Link[] = [];
+    titlesBuscados: Title[] = [];
     urlsAll: Link[] = [];
 
     @MutationAction
     async searchLink(linkSubmit: BuscaSubmit) {
         const urls = await realizarBusca(linkSubmit);
-        return { urlsBuscadas: urls.urlsBuscadas };
+        return { urlsBuscadas: urls.urlsBuscadas, titlesBuscados: urls.titulo };
     }
 
     @MutationAction

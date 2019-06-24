@@ -24,7 +24,7 @@
         <SearchSection :show="show"/>
       </transition>
       <!-- <transition v-if="!show" name="fade"> -->
-        <LinkSearch :urlsBuscadas="urlsBuscadas"/>
+        <LinkSearch :urlsBuscadas="urlsBuscadas" :titlesBuscados="titlesBuscados"/>
       <!-- </transition> -->
     </v-container>
   </div>
@@ -50,6 +50,9 @@ export default class SearchPage extends Vue {
   requisicaoErro = '';
   get urlsBuscadas() {
     return links.urlsBuscadas;
+  }
+  get titlesBuscados() {
+    return links.titlesBuscados;
   }
   searchLink() {
     if (this.pesquisa != '') {

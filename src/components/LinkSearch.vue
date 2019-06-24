@@ -1,6 +1,6 @@
 <template>
   <v-flex xs12 sm6 offset-sm3>
-    <v-card v-for="i in 3" :key="i">
+    <v-card v-for="urlsBuscadas in urlsBuscadas" :key="urlsBuscadas">
       <v-card-title primary-title>
         <div class="link-header">
           <img
@@ -11,16 +11,16 @@
             aria-hidden="true"
             data-atf="1"
           >
-          <span class="url-link">{{urlsBuscadas[0]}} › wiki</span>
+          <span class="url-link">{{urlsBuscadas}} › wiki</span>
         </div>
         <div>
-          <h3 class="headline mb-2" href>{{card.card_title2}}</h3>
+          <h3 class="headline mb-2 titleSearch" href>{{titlesBuscados[0]}}</h3>
           <div>{{ card.card_text2 }}</div>
         </div>
       </v-card-title>
 
       <v-card-actions>
-        <v-btn flat color="blue" :href="urlsBuscadas[0]">Visitar</v-btn>
+        <v-btn flat color="blue" :href="urlsBuscadas">Visitar</v-btn>
       </v-card-actions>
     </v-card>
     <!-- <v-card v-for="i in 3" :key="i">
@@ -52,7 +52,8 @@
 <script>
 export default {
   props: {
-    urlsBuscadas: Array
+    urlsBuscadas: Array,
+    titlesBuscados: Array
   },
   data() {
     return {
@@ -69,6 +70,10 @@ export default {
 </script>
 
 <style scoped>
+.titleSearch:first-letter {
+    text-transform: uppercase;
+}
+
 .link-header {
   padding-bottom: 0.5em;
 }

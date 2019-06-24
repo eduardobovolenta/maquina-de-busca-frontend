@@ -4,6 +4,10 @@ export interface Link {
     favicon?: string;
 }
 
+export interface Title {
+    title: string;
+}
+
 export interface User {
     nome: string;
     login: string;
@@ -32,6 +36,7 @@ export interface UserResponse {
 
 export interface LinkResponse {
     urlsBuscadas?: (Link)[] | null;
+    titulo?:  (Title)[] | null;
 }
 
 export interface CrawlerResponse {
