@@ -21,10 +21,19 @@ export interface BuscaSubmit{
     consulta: string;
 }
 
+export interface CrawlerSubmit{
+    url: string[];
+    profundidade: string;
+}
+
 export interface UserResponse {
     user: User;
 }
 
 export interface LinkResponse {
     link: Link;
+}
+
+export interface CrawlerResponse {
+    urls?: (Link)[] | null;
 }

@@ -20,31 +20,36 @@
             <v-tab-item value="tab-1">
               <v-card flat class="pa-3">
                 <v-card-text>
-                  <v-form>
+                  <v-form ref="form" v-model="valid" lazy-validation @submit.prevent>
                     <v-layout row wrap>
                       <v-flex xs12 sm6 md3>
-                        <v-text-field label="Url a ser processada"></v-text-field>
+                        <v-text-field
+                          v-model="urlProcessada[0]"
+                          name="urlProcessada"
+                          :rules="[rules.required]"
+                          required
+                          label="Url a ser processada"
+                        ></v-text-field>
                       </v-flex>
                     </v-layout>
                     <v-flex xs12 sm6>
-                      <v-slider
-                        color="blue"
-                        label="Profundidade"
-                        min="1"
-                        max="100"
-                        thumb-label
-                      ></v-slider>
+                      <v-slider color="blue" label="Profundidade" min="1" max="100" thumb-label></v-slider>
                     </v-flex>
                     <div class="text-xs-center">
                       <v-btn
-                        :loading="loading"
-                        :disabled="loading"
+                        :loading="loading4"
+                        :disabled="loading4"
                         color="primary"
-                        @click="loader = 'loading'"
+                        @click="loader = 'loading4', rodar()"
                       >Rodar Crawler</v-btn>
                     </div>
                   </v-form>
                 </v-card-text>
+                <v-card>
+                  <v-card-text>
+                    <v-treeview :items="items">{{urlsAll}}</v-treeview>
+                  </v-card-text>
+                </v-card>
               </v-card>
             </v-tab-item>
             <v-tab-item value="tab-2">
@@ -59,32 +64,59 @@
   </div>
 </template>
 
-<script>
+<script lang="ts">
+import { Vue, Component, Prop } from "vue-property-decorator";
 import Toolbar from "../components/toolbar.vue";
-export default {
+import links from "../store/modules/links";
+@Component({
   components: {
     Toolbar
-  },
-  data() {
-    return {
-      loader: null,
-      loading: false,
-      loading2: false,
-      loading3: false,
-      loading4: false
-    };
-  },
-  watch: {
-    loader() {
-      const l = this.loader;
-      this[l] = !this[l];
+  }
+})
+export default class MaquinaDeBusca extends Vue {
+  get urlsAll() {
+    return links.urlsAll;
+  }
 
-      setTimeout(() => (this[l] = false), 3000);
 
-      this.loader = null;
+  loader = null;
+  loading = false;
+  loading4 = false;
+  requisicaoErro = "";
+  valid = true;
+  urlProcessada = [];
+  profundidade = "1";
+  rules = {
+    required: value => !!value || "Campo requerido"
+  };
+
+  items = [];
+  rodar() {
+    if (this.$refs.form.validate()) {
+      this.loading4 = true;
+      links
+        .postCrawler({
+          url: this.urlProcessada,
+          profundidade: this.profundidade
+        })
+        .then(response => (this.loading4 = false))
+        .catch(err => {
+          console.error(err);
+          this.requisicaoErro = "Invalid username or password";
+        });
     }
   }
-};
+  watch = {
+      loader () {
+        const l = this.loader
+        this[l] = !this[l]
+
+        setTimeout(() => (this[l] = false), 3000)
+
+        this.loader = null
+      }
+    }
+}
 </script>
 
 <style scoped>

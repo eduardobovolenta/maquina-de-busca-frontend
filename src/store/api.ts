@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { UserSubmit, User, UserResponse, BuscaSubmit, Link, LinkResponse } from './model/models';
+import { UserSubmit, User, UserResponse, BuscaSubmit, Link, LinkResponse, CrawlerSubmit, CrawlerResponse } from './model/models';
 
 export const conduitApi = axios.create({
     baseURL: 'http://localhost:5000/',
@@ -18,4 +18,11 @@ export async function realizarBusca(busca: BuscaSubmit): Promise<Link> {
         busca
     })
     return (response.data as LinkResponse).link;
+}
+
+export async function rodarCrawler(link : CrawlerSubmit){
+    const response = await conduitApi.post('crawler', {
+        link
+    })
+    return response.data as CrawlerResponse;
 }
