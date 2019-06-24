@@ -13,11 +13,11 @@ export async function realizarLogin(user: UserSubmit): Promise<User> {
     return (responseCorreto as UserResponse).user;
 }
 
-export async function realizarBusca(busca: BuscaSubmit): Promise<Link> {
+export async function realizarBusca(busca: BuscaSubmit){
     const response = await conduitApi.post('busca', {
         busca
     })
-    return (response.data as LinkResponse).link;
+    return response.data as LinkResponse;
 }
 
 export async function rodarCrawler(link : CrawlerSubmit){

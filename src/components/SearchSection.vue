@@ -1,6 +1,6 @@
 <template>
 <transition name="fade">
-  <div v-if="!show" class="portal">
+  <div class="portal">
     <section class="product-selector mb-5" data-stats-ve="45">
       <ul>
         <li>

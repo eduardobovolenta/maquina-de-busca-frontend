@@ -11,13 +11,13 @@ import { realizarBusca, rodarCrawler} from '../api';
     dynamic: true,
 })
 class LinksModule extends VuexModule {
-    link: Link | null = null
+    urlsBuscadas: Link[] = [];
     urlsAll: Link[] = [];
 
     @MutationAction
     async searchLink(linkSubmit: BuscaSubmit) {
-        const link = await realizarBusca(linkSubmit);
-        return { link };
+        const urls = await realizarBusca(linkSubmit);
+        return { urlsBuscadas: urls.urlsBuscadas };
     }
 
     @MutationAction

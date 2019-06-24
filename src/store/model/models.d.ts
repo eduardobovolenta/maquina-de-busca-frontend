@@ -31,7 +31,7 @@ export interface UserResponse {
 }
 
 export interface LinkResponse {
-    link: Link;
+    urlsBuscadas?: (Link)[] | null;
 }
 
 export interface CrawlerResponse {
